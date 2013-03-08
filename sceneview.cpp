@@ -151,17 +151,7 @@ void SceneView::mouseReleaseEvent(QMouseEvent* event) {
 
 void SceneView::mouseDoubleClickEvent(QMouseEvent *event)
 {
-    if (added)
-    {
-        clearMask();
-        added = !added;
-
-        crop = true;
-
-        x = mi->getCX();
-        y = mi->getCY();
-        s = mi->getSize();
-    }
+    startVidMask();
 
     QGraphicsView::mouseDoubleClickEvent(event);
 }
@@ -302,4 +292,19 @@ void SceneView::setMask()
 void SceneView::closing()
 {
     mi->closing();
+}
+
+void SceneView::startVidMask()
+{
+    if (added)
+    {
+        clearMask();
+        added = !added;
+
+        crop = true;
+
+        x = mi->getCX();
+        y = mi->getCY();
+        s = mi->getSize();
+    }
 }

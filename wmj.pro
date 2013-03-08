@@ -1,4 +1,7 @@
 TEMPLATE = app
+
+ RC_FILE = wmj.rc
+
 QT += core gui
 
 #CONFIG += console
@@ -20,3 +23,6 @@ HEADERS += \
     imageframe.h \
     sceneview.h \
     maskitem.h
+
+OTHER_FILES += \
+    wmj.rc

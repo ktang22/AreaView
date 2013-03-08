@@ -21,6 +21,8 @@ public:
     ~SceneView();
     QImage MatToQImage(const Mat& mat);
     void closing();
+    void startVidMask();
+    inline void forceVidMaskCriteria() {added = true;}
 
 public slots:
     void updateImage();

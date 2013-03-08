@@ -3,6 +3,9 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QSettings>
+#include <QKeyEvent>
+#include <QKeySequence>
+#include <QDebug>
 #include "viewdialog.h"
 #include "sceneview.h"
 
@@ -36,12 +39,12 @@ ViewDialog::ViewDialog(QWidget *parent) :
     mainLayout->addLayout(bottomLayout);
 
     setLayout(mainLayout);
-    setFixedSize(1024, 768);
+    setMinimumSize(800, 600);
+//    setFixedSize(800, 600);
     setWindowTitle("Area Viewer by Sunny Instruments Singapore");
 
     connect(sizeSlider, SIGNAL(valueChanged(int)), sv, SLOT(setMaskSize(int)));
     connect(setButton, SIGNAL(clicked()), sv, SLOT(setMask()));
-    connect(sv, SIGNAL(slideChanged(int)), SLOT(sizeSlot(int)));
 }
 
 ViewDialog::~ViewDialog()
@@ -54,4 +57,16 @@ ViewDialog::~ViewDialog()
 void ViewDialog::closing()
 {
     sv->closing();
+}
+
+void ViewDialog::keyPressEvent(QKeyEvent *event)
+{
+    if ((event->key() == Qt::Key_A) && (event->modifiers() & Qt::AltModifier))
+    {
+        qDebug() << "Alt key captured";
+        sv->forceVidMaskCriteria();
+        sv->startVidMask();
+    }
+//    qDebug() << event->key();
+    QDialog::keyPressEvent(event);
 }

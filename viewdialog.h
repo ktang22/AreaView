@@ -17,6 +17,9 @@ public:
 public slots:
     void closing();
 
+protected:
+    void keyPressEvent(QKeyEvent *event);
+
 private:
     SceneView *sv;
     QSlider *sizeSlider;
