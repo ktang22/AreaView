@@ -23,7 +23,7 @@ protected:
 private:
     SceneView *sv;
     QSlider *sizeSlider;
-    QPushButton *setButton;
+//    QPushButton *setButton;
 };
 
 #endif // VIEWDIALOG_H

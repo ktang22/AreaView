@@ -23,6 +23,7 @@ public:
     void closing();
     void startVidMask();
     inline void forceVidMaskCriteria() {added = true;}
+    void reset();
 
 public slots:
     void updateImage();

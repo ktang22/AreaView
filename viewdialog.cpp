@@ -27,12 +27,12 @@ ViewDialog::ViewDialog(QWidget *parent) :
     sizeSlider->setValue(2 * d_size);
     sizeSlider->setOrientation(Qt::Horizontal);
 
-    setButton = new QPushButton("&Set");
+//    setButton = new QPushButton("&Set");
 
     QHBoxLayout *bottomLayout = new QHBoxLayout();
     bottomLayout->addWidget(sizeSlider);
     bottomLayout->addStretch();
-    bottomLayout->addWidget(setButton);
+//    bottomLayout->addWidget(setButton);
 
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
     mainLayout->addWidget(sv);
@@ -44,14 +44,17 @@ ViewDialog::ViewDialog(QWidget *parent) :
     setWindowTitle("Area Viewer by Sunny Instruments Singapore");
 
     connect(sizeSlider, SIGNAL(valueChanged(int)), sv, SLOT(setMaskSize(int)));
-    connect(setButton, SIGNAL(clicked()), sv, SLOT(setMask()));
+//    connect(setButton, SIGNAL(clicked()), sv, SLOT(setMask()));
+
+    sv->forceVidMaskCriteria();
+    sv->startVidMask();
 }
 
 ViewDialog::~ViewDialog()
 {
     delete sv;
     delete sizeSlider;
-    delete setButton;
+//    delete setButton;
 }
 
 void ViewDialog::closing()
@@ -63,9 +66,16 @@ void ViewDialog::keyPressEvent(QKeyEvent *event)
 {
     if ((event->key() == Qt::Key_A) && (event->modifiers() & Qt::AltModifier))
     {
-        qDebug() << "Alt key captured";
         sv->forceVidMaskCriteria();
         sv->startVidMask();
+    }
+    else if ((event->key() == Qt::Key_C) && (event->modifiers() & Qt::AltModifier))
+    {
+        sv->reset();
+    }
+    else if ((event->key() == Qt::Key_S) && (event->modifiers() & Qt::AltModifier))
+    {
+        sv->setMask();
     }
 //    qDebug() << event->key();
     QDialog::keyPressEvent(event);

@@ -133,19 +133,6 @@ void SceneView::mouseReleaseEvent(QMouseEvent* event) {
     setCursor(Qt::OpenHandCursor);
     LastPanPoint = QPoint();
 
-    if (event->button() == Qt::RightButton)
-    {
-        if (added)
-        {
-            clearMask();
-            added = !added;
-        }
-        if (crop)
-        {
-            crop = !crop;
-        }
-    }
-
     QGraphicsView::mouseReleaseEvent(event);
 }
 
@@ -306,5 +293,18 @@ void SceneView::startVidMask()
         x = mi->getCX();
         y = mi->getCY();
         s = mi->getSize();
+    }
+}
+
+void SceneView::reset()
+{
+    if (added)
+    {
+        clearMask();
+        added = !added;
+    }
+    if (crop)
+    {
+        crop = !crop;
     }
 }
